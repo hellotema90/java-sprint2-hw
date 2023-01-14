@@ -7,44 +7,34 @@ public class Main {
         MonthlyReport monthlyReport = new MonthlyReport();
         YearlyReport yearlyReport = new YearlyReport();
 
-
-
         while (true) {
             printMenu();
             int userInput = scanner.nextInt();
             if (userInput == 1) {
+
                 for (int i = 1; i <= 3; i++) {
                     monthlyReport.loadFile(i, "resources/" + "m.20210" + i + ".csv");
                 }
 
-
             } else if (userInput == 2) {
                 yearlyReport.loadFile( "resources/y.2021.csv");
-
 
             } else if (userInput == 3) {
                 Checker checker = new Checker(yearlyReport, monthlyReport);
                 boolean answer = checker.check();
                 System.out.println("Сверка прошла успешно  " + answer );
 
-
             } else if (userInput == 4) {
                 monthlyReport.printMonthReport();
 
-
             } else if (userInput == 5) {
                 yearlyReport.printYearReport();
-                
 
             } else if (userInput == 9999) {
                 break;
             } else {
                 System.out.println("Такой команды нет");
-
             }
-
-
-
         }
     }
 

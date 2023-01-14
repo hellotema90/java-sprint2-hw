@@ -56,8 +56,8 @@ public class YearlyReport {
         return sum;
     }
 
-    public int averageExpense(){
-        int sum = 0;
+    public double averageExpense(){
+        double sum = 0;
         int numMonth = 1;
         for (Yearly yearly : yearlys) {
             if(yearly.isExpense) {
@@ -67,8 +67,8 @@ public class YearlyReport {
             }
         return sum/numMonth;
     }
-    public int averageIncome(){
-        int sum = 0;
+    public double averageIncome(){
+        double sum = 0;
         int numMonth = 1;
         for (Yearly yearly : yearlys) {
             if(!yearly.isExpense) {
@@ -82,9 +82,10 @@ public class YearlyReport {
         System.out.println("Рассматриваемый год: " + 2021);
             for (int i = 1; i <= 3; i++) {
                 System.out.println("Прибыль по месяцу " + i + " : " + (sumIncomeInMonth(i) - sumExpenseInMonth(i)));
+            }
                 System.out.println("Средний расход за все месяцы в году: " + averageExpense());
                 System.out.println("Средний доход за все месяцы в году: " + averageIncome());
-            }
+
     }
 
     }

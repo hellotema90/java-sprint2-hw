@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class MonthlyReport {
     public ArrayList<Monthly> monthlys = new java.util.ArrayList<>();
@@ -30,90 +31,55 @@ public class MonthlyReport {
         }
     }
 
-    public int sumExpense() {
-        int sum = 0;
+    public String getTopItem(int month, boolean isExp) {
+        LinkedHashMap<String, Integer> topItemByMonth = new LinkedHashMap<>();
         for (Monthly monthly : monthlys) {
-                if(monthly.isExpense){
-                    sum += monthly.quantity * monthly.sumOfOne ;
-                }
-            }
-        return sum;
-    }
-
-    public int sumIncome() {
-        int sum = 0;
-        for (Monthly monthly : monthlys) {
-            if(!monthly.isExpense){
-                sum += monthly.quantity * monthly.sumOfOne ;
-            }
-        }
-        return sum;
-    }
-
-    public int maxIncome() {
-        int max = 0;
-        for (Monthly monthly : monthlys) {
-            if (!monthly.isExpense) {
-                if ((monthly.quantity * monthly.sumOfOne) > max) {
-                    max = monthly.quantity * monthly.sumOfOne;
+            if (monthly.month == month) {
+                if (monthly.isExpense == isExp) {
+                    topItemByMonth.put(monthly.itemName, (monthly.quantity * monthly.sumOfOne));
                 }
             }
         }
-        return max;
-    }
-
-    public String maxIncomeItem() {
-        int max = 0;
-        String item = null;
-        for (Monthly monthly : monthlys) {
-            if (!monthly.isExpense) {
-                if ((monthly.quantity * monthly.sumOfOne) > max) {
-                    max = monthly.quantity * monthly.sumOfOne;
-                    item = monthly.itemName;
-                }
+        String topItemName = null;
+        for (String itemName : topItemByMonth.keySet()) {
+            if(topItemName == null) {
+                topItemName = itemName;
+                continue;
+            }
+            if (topItemByMonth.get(topItemName) < topItemByMonth.get(itemName)) {
+                topItemName = itemName;
             }
         }
-        return item;
+        return topItemName;
     }
 
-    public int maxExpense() {
-        int max = 0;
-        for (Monthly monthly : monthlys) {
-            if (monthly.isExpense) {
-                if ((monthly.quantity * monthly.sumOfOne) > max) {
-                    max = monthly.quantity * monthly.sumOfOne;
+    public int getMaxExpense(int month, boolean isExp) {
+            int max = 0;
+            for (Monthly monthly : monthlys) {
+                if (monthly.month == month) {
+                    if (monthly.isExpense == isExp) {
+                        if ((monthly.quantity * monthly.sumOfOne) > max) {
+                            max = monthly.quantity * monthly.sumOfOne;
+                        }
+                    }
                 }
             }
-        }
-        return max;
-    }
-
-    public String maxExpenseItem() {
-        int max = 0;
-        String item = null;
-        for (Monthly monthly : monthlys) {
-            if (monthly.isExpense) {
-                if ((monthly.quantity * monthly.sumOfOne) > max) {
-                    max = monthly.quantity * monthly.sumOfOne;
-                    item = monthly.itemName;
-                }
-            }
-        }
-        return item;
+            return max;
     }
 
     public void printMonthReport() {
         for (int i = 1; i <= 3; i++) {
 
-                System.out.println("Месяц номер: " + i);
-                System.out.println("Самый прибыльный товар: " + maxIncomeItem() + ", " + maxIncome());
-                System.out.println("Самая большая трата: " + maxExpenseItem() + ", " + maxExpense());
-                System.out.println();
-            }
+            System.out.println("Месяц номер: " + i);
+            /*
+            System.out.println("doxod" + getTopItem(i,false) + getMaxExpense(i, false));
+            System.out.println("trata" + getTopItem(i,true)+ getMaxExpense(i, true));
+            */
+            System.out.println("Самый прибыльный товар: " + getTopItem(i,false) + ", " + getMaxExpense(i, false));
+            System.out.println("Самая большая трата: " + getTopItem(i,true) + ", " + getMaxExpense(i, true));
+            System.out.println();
+
+
         }
-
-
-
-
-
+        }
 }
