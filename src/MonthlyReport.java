@@ -71,10 +71,6 @@ public class MonthlyReport {
         for (int i = 1; i <= 3; i++) {
 
             System.out.println("Месяц номер: " + i);
-            /*
-            System.out.println("doxod" + getTopItem(i,false) + getMaxExpense(i, false));
-            System.out.println("trata" + getTopItem(i,true)+ getMaxExpense(i, true));
-            */
             System.out.println("Самый прибыльный товар: " + getTopItem(i,false) + ", " + getMaxExpense(i, false));
             System.out.println("Самая большая трата: " + getTopItem(i,true) + ", " + getMaxExpense(i, true));
             System.out.println();
