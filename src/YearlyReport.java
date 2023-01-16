@@ -9,6 +9,10 @@ public class YearlyReport {
 
     public void loadFile (String path) {
         String content = readFileContentsOrNull(path);
+        if (content == null) {
+            System.out.println();
+            return;
+        }
         String[] lines = content.split("\r?\n");
         for (int i = 1; i < lines.length; i++) {
             String line = lines[i]; // "month,amount,is_expense"
@@ -35,7 +39,7 @@ public class YearlyReport {
     public int sumExpenseInMonth(int month){
         int sum = 0;
         for (Yearly yearly : yearlys) {
-            if(yearly.month == (month + 1)){
+            if(yearly.month == month) {
                 if(yearly.isExpense){
                     sum += yearly.amount;
                 }
@@ -47,7 +51,7 @@ public class YearlyReport {
     public int sumIncomeInMonth(int month) {
         int sum = 0;
         for (Yearly yearly : yearlys) {
-            if(yearly.month == (month + 1)){
+            if(yearly.month == month){
                 if(!yearly.isExpense){
                     sum += yearly.amount;
                 }
@@ -58,28 +62,29 @@ public class YearlyReport {
 
     public double averageExpense(){
         double sum = 0;
-        int numMonth = 1;
+
         for (Yearly yearly : yearlys) {
             if(yearly.isExpense) {
                 sum += yearly.amount;
-                numMonth++;
+
                 }
             }
-        return sum/numMonth;
+        return sum/3;
     }
     public double averageIncome(){
         double sum = 0;
-        int numMonth = 1;
+
         for (Yearly yearly : yearlys) {
             if(!yearly.isExpense) {
                 sum += yearly.amount;
-                numMonth++;
+
             }
         }
-        return sum/numMonth;
+        return sum/3;
     }
     public void printYearReport() {
         System.out.println("Рассматриваемый год: " + 2021);
+        System.out.println("Если отчет не считан, то будет выведено во всех значениях: 0");
             for (int i = 1; i <= 3; i++) {
                 System.out.println("Прибыль по месяцу " + i + " : " + (sumIncomeInMonth(i) - sumExpenseInMonth(i)));
             }

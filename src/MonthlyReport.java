@@ -9,6 +9,10 @@ public class MonthlyReport {
 
     public void loadFile(int month, String path) {
         String content = readFileContentsOrNull(path);
+        if (content == null) {
+            System.out.println();
+            return;
+        }
         String[] lines = content.split("\r?\n");
         for (int i = 1; i < lines.length; i++) {
             String line = lines[i]; //item_name,is_expense,quantity,sum_of_one
@@ -68,6 +72,7 @@ public class MonthlyReport {
     }
 
     public void printMonthReport() {
+        System.out.println("Если отчеты не считаны, то будет выведено во всех значениях: null, 0");
         for (int i = 1; i <= 3; i++) {
 
             System.out.println("Месяц номер: " + i);

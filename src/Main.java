@@ -22,7 +22,11 @@ public class Main {
             } else if (userInput == 3) {
                 Checker checker = new Checker(yearlyReport, monthlyReport);
                 boolean answer = checker.check();
-                System.out.println("Сверка прошла успешно  " + answer );
+                if(answer == true) {
+                    System.out.println("Сверка прошла успешно.");
+                }else{
+                    System.out.println("Сверка прошла не успешно, нужно перепроверить.");
+                }
 
             } else if (userInput == 4) {
                 monthlyReport.printMonthReport();
@@ -40,12 +44,12 @@ public class Main {
 
     private static void printMenu() {
         System.out.println("Что вы хотите сделать?");
-        System.out.println("1 - Считать все месячные отчёты");
-        System.out.println("2 - Считать годовой отчёт");
-        System.out.println("3 - Сверить отчёты");
-        System.out.println("4 - Вывести информацию о всех месячных отчётах");
-        System.out.println("5 - Вывести информацию о годовом отчёте");
-        System.out.println("9999 - Выход");
+        System.out.println("1 - Считать все месячные отчёты.");
+        System.out.println("2 - Считать годовой отчёт.");
+        System.out.println("3 - Сверить отчёты.");
+        System.out.println("4 - Вывести информацию о всех месячных отчётах.");
+        System.out.println("5 - Вывести информацию о годовом отчёте.");
+        System.out.println("9999 - Выход.");
 
     }
 }
