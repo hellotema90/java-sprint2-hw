@@ -46,7 +46,7 @@ public class MonthlyReport {
         }
         String topItemName = null;
         for (String itemName : topItemByMonth.keySet()) {
-            if(topItemName == null) {
+            if (topItemName == null) {
                 topItemName = itemName;
                 continue;
             }
@@ -58,29 +58,32 @@ public class MonthlyReport {
     }
 
     public int getMaxExpense(int month, boolean isExp) {
-            int max = 0;
-            for (Monthly monthly : monthlys) {
-                if (monthly.month == month) {
-                    if (monthly.isExpense == isExp) {
-                        if ((monthly.quantity * monthly.sumOfOne) > max) {
-                            max = monthly.quantity * monthly.sumOfOne;
-                        }
+        int max = 0;
+        for (Monthly monthly : monthlys) {
+            if (monthly.month == month) {
+                if (monthly.isExpense == isExp) {
+                    if ((monthly.quantity * monthly.sumOfOne) > max) {
+                        max = monthly.quantity * monthly.sumOfOne;
                     }
                 }
             }
-            return max;
+        }
+        return max;
     }
 
     public void printMonthReport() {
-        System.out.println("Если отчеты не считаны, то будет выведено во всех значениях: null, 0");
-        for (int i = 1; i <= 3; i++) {
+        if (monthlys.isEmpty()) {
+            System.out.println("Данных нет");
+        } else {
+            for (int i = 1; i <= 3; i++) {
 
-            System.out.println("Месяц номер: " + i);
-            System.out.println("Самый прибыльный товар: " + getTopItem(i,false) + ", " + getMaxExpense(i, false));
-            System.out.println("Самая большая трата: " + getTopItem(i,true) + ", " + getMaxExpense(i, true));
-            System.out.println();
+                System.out.println("Месяц номер: " + i);
+                System.out.println("Самый прибыльный товар: " + getTopItem(i, false) + ", " + getMaxExpense(i, false));
+                System.out.println("Самая большая трата: " + getTopItem(i, true) + ", " + getMaxExpense(i, true));
+                System.out.println();
 
 
+            }
         }
-        }
+    }
 }

@@ -84,13 +84,15 @@ public class YearlyReport {
     }
     public void printYearReport() {
         System.out.println("Рассматриваемый год: " + 2021);
-        System.out.println("Если отчет не считан, то будет выведено во всех значениях: 0");
+        if (yearlys.isEmpty()) {
+            System.out.println("Данных нет");
+        } else {
             for (int i = 1; i <= 3; i++) {
                 System.out.println("Прибыль по месяцу " + i + " : " + (sumIncomeInMonth(i) - sumExpenseInMonth(i)));
             }
-                System.out.println("Средний расход за все месяцы в году: " + averageExpense());
-                System.out.println("Средний доход за все месяцы в году: " + averageIncome());
+            System.out.println("Средний расход за все месяцы в году: " + averageExpense());
+            System.out.println("Средний доход за все месяцы в году: " + averageIncome());
 
+        }
     }
-
     }

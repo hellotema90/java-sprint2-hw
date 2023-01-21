@@ -25,7 +25,7 @@ public class Main {
                 if(answer == true) {
                     System.out.println("Сверка прошла успешно.");
                 }else{
-                    System.out.println("Сверка прошла не успешно, нужно перепроверить.");
+                    System.out.println("Сверка прошла НЕ успешно, нужно перепроверить.");
                 }
 
             } else if (userInput == 4) {
