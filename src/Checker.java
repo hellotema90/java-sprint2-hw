@@ -11,7 +11,7 @@ public class Checker {
     }
 
     public boolean check()  {
-        boolean check = true;
+        boolean check = false;
 
         HashMap<Integer, HashMap<Boolean, Integer>> reportMonth = new HashMap<>();
         for (Monthly monthly : monthlyReport.monthlys) {
@@ -39,7 +39,6 @@ public class Checker {
 
             if (amountYearByMonth == null) {
                 System.out.println("Отчет отсутствует за месяц номер: " + month);
-                check = false;
                 continue;
             }
 
@@ -47,9 +46,8 @@ public class Checker {
             for (Boolean isExpense : amountYearByYear.keySet()) {
                 int yearByYear = amountYearByYear.get(isExpense);
                 int yearByMonth = amountYearByMonth.getOrDefault(isExpense, 0);
-                if(yearByYear != yearByMonth) {
-                    System.out.println("Есть несоответствие");
-                    check = false;
+                if(yearByYear == yearByMonth) {
+                    check = true;
                 }
             }
         }
@@ -59,7 +57,6 @@ public class Checker {
 
             if (amountMonthByYear == null) {
                 System.out.println("Отчет отсутствует за год");
-                check = false;
                 continue;
             }
 
@@ -67,9 +64,8 @@ public class Checker {
             for (Boolean isExpense : amountMonthByMonth.keySet()) {
                 int monthByYear = amountMonthByMonth.get(isExpense);
                 int monthByMonth = amountMonthByYear.getOrDefault(isExpense, 0);
-                if(monthByYear != monthByMonth) {
-                    System.out.println("Есть несоответствие");
-                    check = false;
+                if(monthByYear == monthByMonth) {
+                    check = true;
                 }
             }
         }
